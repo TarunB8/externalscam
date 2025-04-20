@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PDF Viewer Page</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Select a Subject</h1>
+    <div class="subjects">
+      <button onclick="loadSubject('cn')">COMPUTER NETWORKS</button>
+      <button onclick="loadSubject('dbms')">DBMS</button>
+      <button onclick="loadSubject('fsd')">FSD</button>
+    </div>
+
+    <div id="pdfList" class="pdf-list"></div>
+    <div id="pdfViewer" class="pdf-viewer">
+      <iframe id="pdfFrame" src="" frameborder="0"></iframe>
+    </div>
+  </div>
+
+  <script>
+    const pdfs = {
+      cn: ["cn lab-1.pdf"],
+      dbms: [
+      "DBMS LAB EXP 1.pdf",
+        "DBMS LAB EXP 2.pdf",
+        "DBMS LAB EXP 3.pdf",
+        "DBMS LAB EXP 4.pdf",
+        "DBMS LAB EXP 5.pdf",
+        "DBMS LAB EXP 6.pdf",
+        "DBMS LAB EXP 7.pdf",
+        "DBMS LAB EXP 8.pdf",
+        "DBMS LAB EXP 9.pdf",
+        "DBMS LAB EXP 10.pdf",
+        "DBMS LAB EXP 11.pdf",
+        "DBMS LAB EXP 12.pdf",
+        "DBMS LAB EXP 13-15.pdf",
+    ],
+      fsd: ["FSD Lab Programs.pdf"]
+    };
+
+
+  function loadSubject(subject) {
+    const list = pdfs[subject];
+    const container = document.getElementById("pdfList");
+    container.innerHTML = `<h2>${subject.toUpperCase()} PDFs:</h2><div class="pdf-buttons">`;
+    list.forEach(pdf => {
+      container.innerHTML += `
+        <button class="pdf-button" onclick="openPDF('${subject}', '${pdf}')">${pdf}</button>
+      `;
+    });
+    container.innerHTML += `</div>`;
+  }
+
+  function openPDF(subject, pdf) {
+    const viewer = document.getElementById("pdfViewer");
+    const frame = document.getElementById("pdfFrame");
+    frame.src = `pdfs/${subject}/${pdf}#toolbar=1`;
+    viewer.style.display = 'block';
+  }
+
+  </script>
+</body>
+</html>
