@@ -66,16 +66,19 @@
     const frame = document.getElementById("pdfFrame");
     const filePath = `pdfs/${subject}/${pdf}#toolbar=1&view=FitH`;
 
-    // For mobile, check width
     if (window.innerWidth < 768) {
-      alert("Preview not supported on small screens. Please download or view on desktop.");
-      window.open(`pdfs/${subject}/${pdf}`, '_blank');
+      alert("Mobile preview not supported. Opening in new tab.");
+      window.open(filePath, "_blank");
       return;
     }
 
     frame.src = filePath;
     viewer.style.display = 'block';
+
+    // Scroll smoothly to viewer
+    viewer.scrollIntoView({ behavior: "smooth" });
   }
+
   </script>
 </body>
 </html>
