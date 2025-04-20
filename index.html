@@ -41,26 +41,40 @@
       fsd: ["FSD Lab Programs.pdf"]
     };
 
+ function loadSubject(subject) {
+    // Clear old viewer
+    document.getElementById("pdfViewer").style.display = 'none';
+    document.getElementById("pdfFrame").src = "";
 
-  function loadSubject(subject) {
+    // Clear and show new list
     const list = pdfs[subject];
     const container = document.getElementById("pdfList");
     container.innerHTML = `<h2>${subject.toUpperCase()} PDFs:</h2><div class="pdf-buttons">`;
+
     list.forEach(pdf => {
       container.innerHTML += `
         <button class="pdf-button" onclick="openPDF('${subject}', '${pdf}')">${pdf}</button>
       `;
     });
+
     container.innerHTML += `</div>`;
   }
 
   function openPDF(subject, pdf) {
     const viewer = document.getElementById("pdfViewer");
     const frame = document.getElementById("pdfFrame");
-    frame.src = `pdfs/${subject}/${pdf}#toolbar=1`;
+    const filePath = `pdfs/${subject}/${pdf}#toolbar=1&view=FitH`;
+
+    // For mobile, check width
+    if (window.innerWidth < 768) {
+      alert("Preview not supported on small screens. Please download or view on desktop.");
+      window.open(`pdfs/${subject}/${pdf}`, '_blank');
+      return;
+    }
+
+    frame.src = filePath;
     viewer.style.display = 'block';
   }
-
   </script>
 </body>
 </html>
