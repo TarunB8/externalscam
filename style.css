@@ -53,4 +53,21 @@ body {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
   }
+@media (max-width: 768px) {
+  .pdf-viewer iframe {
+    width: 95%;
+    height: 450px;
+  }
+
+  .subjects button,
+  .pdf-button {
+    width: 90%;
+    font-size: 1em;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+}
+
   
